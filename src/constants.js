@@ -1,0 +1,31 @@
+export const defaultValues = {
+  date: new Date().toISOString().slice(0, 10),
+  billNumber: '',
+  vehicleNumber: '',
+  gstNumber: '',
+  customerName: '',
+  driverName: '',
+  driverLicenseNumber: '',
+  startingPlace: '',
+  endingPlace: '',
+  startingKm: '',
+  endingKm: '',
+  startingTime: '09:00',
+  endingTime: '10:30',
+  tollCharges: '0',
+  parkingCharges: '0',
+  interstatePermitCharges: '0',
+  miscellaneousCharges: '0',
+  perKmCharges: '0',
+  totalAmount: '',
+  advance: '0',
+  remarks: '',
+};
+
+export const chargeFields = [
+  { key: 'perKmCharges', label: 'Vehicle Charges' },
+  { key: 'tollCharges', label: 'Toll Charges' },
+  { key: 'parkingCharges', label: 'Parking Charges' },
+  { key: 'interstatePermitCharges', label: 'Interstate Permit Charges' },
+  { key: 'miscellaneousCharges', label: 'Miscellaneous Charges' },
+];
