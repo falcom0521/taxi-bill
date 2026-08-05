@@ -20,7 +20,6 @@ export const Home = () => {
     showPreview,
     setShowPreview,
     totalCharges,
-    balanceAmount,
     toggleDarkMode,
     showToast,
     setIsGeneratingPdf,
@@ -31,10 +30,6 @@ export const Home = () => {
   const onSubmit = (data) => {
     if (Number(data.endingKm) < Number(data.startingKm)) {
       showToast('Ending KM cannot be smaller than starting KM');
-      return;
-    }
-    if (Number(data.advance) > Number(data.totalAmount || 0)) {
-      showToast('Advance cannot exceed total amount');
       return;
     }
     setShowPreview(true);
@@ -98,10 +93,8 @@ export const Home = () => {
       interstatePermitCharges: '0',
       miscellaneousCharges: '0',
       totalAmount: '',
-      advance: '0',
       remarks: '',
       totalKm: 0,
-      balanceAmount: 0,
     });
     setShowPreview(true);
     setView('form');

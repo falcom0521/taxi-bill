@@ -10,12 +10,6 @@ export const calculateTotalKm = (startKm, endKm) => {
   return Math.max(0, end - start);
 };
 
-export const calculateBalance = (total, advance) => {
-  const totalAmount = Number(total) || 0;
-  const advanceAmount = Number(advance) || 0;
-  return Math.max(0, totalAmount - advanceAmount);
-};
-
 export const sumCharges = (values) => {
   const chargeKeys = ['tollCharges', 'parkingCharges', 'interstatePermitCharges', 'miscellaneousCharges', 'perKmCharges'];
   return chargeKeys.reduce((sum, key) => sum + (Number(values[key]) || 0), 0);

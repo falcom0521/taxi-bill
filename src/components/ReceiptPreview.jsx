@@ -33,7 +33,7 @@ export const ReceiptPreview = ({ values, isDark, previewRef }) => {
       className={`receipt-print-area rounded-[24px] border border-slate-200 p-4 shadow-soft sm:p-6 ${isDark ? 'border-slate-700 bg-slate-900 text-slate-100' : 'bg-white text-slate-900'}`}
       ref={previewRef}
     >
-      <div className="relative mx-auto max-w-[900px] rounded-[20px] border border-slate-200 bg-white p-6 text-slate-900 shadow-sm">
+        <div className="relative mx-auto w-[100%] max-w-none rounded-[20px] border border-slate-200 bg-white p-6 text-slate-900 shadow-sm">
         <div className="text-center">
           <h2 className="text-2xl font-semibold uppercase tracking-[0.2em]">TAXI RECEIPT</h2>
           <div className="mt-4 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
@@ -42,14 +42,14 @@ export const ReceiptPreview = ({ values, isDark, previewRef }) => {
           </div>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-slate-200 p-4">
+        <div className=" rounded-2xl p-4">
           {values.customerName ? (
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Customer</span>
               <span className="text-lg font-semibold text-slate-900">{values.customerName}</span>
             </div>
           ) : null}
-          <div className="mt-3 grid gap-3 md:grid-cols-2">
+          <div className="mt-3 grid gap-1 md:grid-cols-2">
             {customerDetails.filter((detail) => detail.label !== 'Customer Name').map((detail) => (
               <p key={detail.label} className="text-sm text-slate-700">
                 {detail.label}: {detail.value}
@@ -60,12 +60,11 @@ export const ReceiptPreview = ({ values, isDark, previewRef }) => {
 
         <JourneySection values={values} totalKm={totalKm} />
         <ChargesTable values={values} />
-        <PaymentSummary values={values} />
         <RemarksSection remarks={values.remarks} />
         <img
           src={receiptSeal}
           alt="Receipt Seal"
-          className="pointer-events-none absolute bottom-6 right-6 h-24 w-24 rounded-3xl object-contain opacity-90"
+          className="pointer-events-none absolute bottom-10 right-6 h-24 w-24 rounded-3xl object-contain opacity-90"
         />
         <Footer />
       </div>

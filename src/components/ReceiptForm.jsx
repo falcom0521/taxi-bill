@@ -114,18 +114,9 @@ export const ReceiptForm = ({ form, errors, values, onSubmit, isGeneratingPdf, o
         <section>
           <h3 className="mb-3 text-lg font-semibold text-slate-900 dark:text-white">Payment</h3>
           <div className="grid gap-4 md:grid-cols-2">
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
+            <label className="text-sm font-medium text-slate-700 dark:text-slate-300 md:col-span-2">
               <span>Total Amount</span>
               <input type="number" step="0.01" {...register('totalAmount')} className="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 outline-none focus:border-accent dark:border-slate-700 dark:bg-slate-800 dark:text-white" />
-            </label>
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              <span>Advance</span>
-              <input type="number" step="0.01" {...register('advance', { validate: (value) => !value || Number(value) <= Number(values.totalAmount || 0) || 'Advance cannot exceed total amount' })} className="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 outline-none focus:border-accent dark:border-slate-700 dark:bg-slate-800 dark:text-white" />
-              {errors.advance && <span className="mt-1 block text-xs text-red-500">{errors.advance.message}</span>}
-            </label>
-            <label className="text-sm font-medium text-slate-700 dark:text-slate-300 md:col-span-2">
-              <span>Balance Amount</span>
-              <input readOnly value={formatCurrency(values.balanceAmount || 0)} className="mt-1 w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2 text-slate-700 outline-none dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200" />
             </label>
           </div>
         </section>

@@ -15,7 +15,7 @@ export const JourneySection = ({ values, totalKm }) => {
   if (!journeyRows.length && !tripRows.length) return null;
 
   return (
-    <div className="mt-6 grid gap-4 rounded-2xl border border-slate-200 p-4 md:grid-cols-2">
+    <div className="grid gap-4 rounded-2xl p-4 grid-cols-2">
       {journeyRows.length > 0 ? (
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Journey Details</p>

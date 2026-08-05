@@ -21,14 +21,6 @@ export const ChargesTable = ({ values }) => (
           <td className="px-4 py-3 font-semibold">Total Amount</td>
           <td className="px-4 py-3 text-right font-semibold">{formatCurrency(Number(values.totalAmount) || 0)}</td>
         </tr>
-        <tr className="border-t border-slate-200">
-          <td className="px-4 py-3">Advance Paid</td>
-          <td className="px-4 py-3 text-right">{formatCurrency(Number(values.advance) || 0)}</td>
-        </tr>
-        <tr className="border-t border-slate-200 bg-slate-50">
-          <td className="px-4 py-3 font-semibold">Balance Amount</td>
-          <td className="px-4 py-3 text-right font-semibold">{formatCurrency(Number(values.balanceAmount) || 0)}</td>
-        </tr>
       </tbody>
     </table>
   </div>

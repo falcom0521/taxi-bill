@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { defaultValues } from '../constants';
-import { calculateBalance, calculateTotalKm, generateBillNumber, sumCharges } from '../utils/calculations';
+import { calculateTotalKm, generateBillNumber, sumCharges } from '../utils/calculations';
 import { loadReceiptState, saveReceiptState } from '../utils/storage';
 
 export const useReceipt = () => {
@@ -44,12 +44,10 @@ export const useReceipt = () => {
 
   const totalCharges = useMemo(() => sumCharges(values), [values]);
   const totalAmount = useMemo(() => totalCharges, [totalCharges]);
-  const balanceAmount = useMemo(() => calculateBalance(totalAmount, Number(values.advance) || 0), [totalAmount, values.advance]);
 
   useEffect(() => {
     setValue('totalAmount', totalAmount, { shouldDirty: true });
-    setValue('balanceAmount', balanceAmount, { shouldDirty: true });
-  }, [totalAmount, balanceAmount, setValue]);
+  }, [totalAmount, setValue]);
 
   const toggleDarkMode = () => setIsDark((prev) => !prev);
   const showToast = (message) => {
@@ -67,7 +65,6 @@ export const useReceipt = () => {
     showPreview,
     setShowPreview,
     totalCharges,
-    balanceAmount,
     toggleDarkMode,
     showToast,
     setIsGeneratingPdf,

@@ -18,7 +18,6 @@ export const defaultValues = {
   miscellaneousCharges: '0',
   perKmCharges: '0',
   totalAmount: '',
-  advance: '0',
   remarks: '',
 };
 

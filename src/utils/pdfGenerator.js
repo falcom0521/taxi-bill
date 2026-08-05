@@ -2,24 +2,44 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 export const generateReceiptPdf = async (element, billNumber) => {
-  const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
-  const imgData = canvas.toDataURL('image/png');
+  const elementWidth = Math.max(element.scrollWidth || element.offsetWidth, element.clientWidth || 0);
+  const elementHeight = Math.max(element.scrollHeight || element.offsetHeight, element.clientHeight || 0);
+
+  const canvas = await html2canvas(element, {
+    scale: Math.max(2, window.devicePixelRatio || 2),
+    useCORS: true,
+    backgroundColor: '#ffffff',
+    width: elementWidth,
+    height: elementHeight,
+    windowWidth: elementWidth,
+    windowHeight: elementHeight,
+    scrollY: -window.scrollY,
+  });
+
   const pdf = new jsPDF('p', 'mm', 'a4');
   const pdfWidth = pdf.internal.pageSize.getWidth();
   const pdfHeight = pdf.internal.pageSize.getHeight();
-  const margin = 10;
+  const margin = 5;
   const availableWidth = pdfWidth - margin * 2;
   const availableHeight = pdfHeight - margin * 2;
+  const scale = availableWidth / canvas.width;
+  const fullHeight = canvas.height * scale;
 
-  let imgWidth = availableWidth;
-  let imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const imgData = canvas.toDataURL('image/png');
 
-  if (imgHeight > availableHeight) {
-    imgHeight = availableHeight;
-    imgWidth = (canvas.width * imgHeight) / canvas.height;
+  if (fullHeight <= availableHeight) {
+    pdf.addImage(imgData, 'PNG', margin, margin, availableWidth, fullHeight);
+    return pdf.output('blob');
   }
 
-  pdf.addImage(imgData, 'PNG', margin, margin, imgWidth, imgHeight);
+  // If content is taller than a single page, scale it down to fit on one page
+  const shrink = availableHeight / fullHeight; // < 1
+  const finalWidth = availableWidth * shrink;
+  const finalHeight = availableHeight; // fullHeight * shrink
+  // center horizontally by calculating left margin
+  const left = margin + (availableWidth - finalWidth) / 2;
+
+  pdf.addImage(imgData, 'PNG', left, margin, finalWidth, finalHeight);
   return pdf.output('blob');
 };
 
