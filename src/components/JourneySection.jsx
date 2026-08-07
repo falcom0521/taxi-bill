@@ -1,4 +1,4 @@
-export const JourneySection = ({ values, totalKm }) => {
+export const JourneySection = ({ values, totalKm, customerDetails = [] }) => {
   const journeyRows = [
     values.startingPlace && { label: 'Starting Place', value: values.startingPlace },
     values.endingPlace && { label: 'Ending Place', value: values.endingPlace },
@@ -12,26 +12,45 @@ export const JourneySection = ({ values, totalKm }) => {
     totalKm > 0 && { label: 'Total KM', value: totalKm },
   ].filter(Boolean);
 
-  if (!journeyRows.length && !tripRows.length) return null;
+  if (!customerDetails.length && !journeyRows.length && !tripRows.length) return null;
 
   return (
-    <div className="grid gap-4 rounded-2xl p-4 grid-cols-2">
+    <div className="mt-4 flex flex-nowrap items-start gap-4 rounded-2xl border border-slate-200 bg-gradient-to-r from-blue-50 to-slate-50 p-4 dark:border-slate-700 dark:from-slate-800 dark:to-slate-900">
+      {customerDetails.length > 0 ? (
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-700">Customer</p>
+          <div className="mt-2 space-y-1 text-sm">
+            {customerDetails.map((row) => (
+              <p key={row.label} className="leading-6">
+                <span className="font-semibold text-slate-700">{row.label}:</span>{' '}
+                <span className="text-slate-500">{row.value}</span>
+              </p>
+            ))}
+          </div>
+        </div>
+      ) : null}
       {journeyRows.length > 0 ? (
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Journey Details</p>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-700">Journey Details</p>
           <div className="mt-2 space-y-1 text-sm">
             {journeyRows.map((row) => (
-              <p key={row.label}>{row.label}: {row.value}</p>
+              <p key={row.label} className="leading-6">
+                <span className="font-semibold text-slate-700">{row.label}:</span>{' '}
+                <span className="text-slate-500">{row.value}</span>
+              </p>
             ))}
           </div>
         </div>
       ) : null}
       {tripRows.length > 0 ? (
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Trip Data</p>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-700">Trip Data</p>
           <div className="mt-2 space-y-1 text-sm">
             {tripRows.map((row) => (
-              <p key={row.label}>{row.label}: {row.value}</p>
+              <p key={row.label} className="leading-6">
+                <span className="font-semibold text-slate-700">{row.label}:</span>{' '}
+                <span className="text-slate-500">{row.value}</span>
+              </p>
             ))}
           </div>
         </div>

@@ -103,7 +103,7 @@ export const Home = () => {
 
   return (
     <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-white' : 'bg-surface text-slate-900'}`}>
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-none flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
         <Header isDark={isDark} onToggleDark={toggleDarkMode} />
         {view === 'landing' ? (
           <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="rounded-[32px] border border-slate-200 bg-white/80 p-8 shadow-soft backdrop-blur dark:border-slate-700 dark:bg-slate-900/80">
@@ -119,7 +119,7 @@ export const Home = () => {
             </div>
           </motion.section>
         ) : (
-          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid w-full gap-6 lg:grid-cols-1">
             <ReceiptForm form={form} errors={errors} values={values} onSubmit={onSubmit} isGeneratingPdf={isGeneratingPdf} onCreateNew={handleCreateNew} isDark={isDark} totalCharges={totalCharges} />
             <div className="space-y-4">
               <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-soft dark:border-slate-700 dark:bg-slate-900">
@@ -131,7 +131,7 @@ export const Home = () => {
               </div>
               <AnimatePresence mode="wait">
                 {showPreview ? (
-                  <motion.div key="preview" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-4">
+                  <motion.div key="preview" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="w-full space-y-4">
                     <ReceiptPreview values={values} isDark={isDark} previewRef={previewRef} />
                     <div className="flex flex-wrap gap-3">
                       <button type="button" onClick={handleDownloadPdf} className="flex items-center gap-2 rounded-2xl bg-accent px-4 py-2.5 font-semibold text-white transition hover:bg-accent/90">

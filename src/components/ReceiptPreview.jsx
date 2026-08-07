@@ -30,35 +30,24 @@ export const ReceiptPreview = ({ values, isDark, previewRef }) => {
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      className={`receipt-print-area rounded-[24px] border border-slate-200 p-4 shadow-soft sm:p-6 ${isDark ? 'border-slate-700 bg-slate-900 text-slate-100' : 'bg-white text-slate-900'}`}
+      className={`receipt-print-area mx-auto w-full max-w-[100%] rounded-[24px] border border-slate-200 p-3 shadow-soft sm:p-5 lg:p-6 ${isDark ? 'border-slate-700 bg-slate-900 text-slate-100' : 'bg-white text-slate-900'}`}
       ref={previewRef}
     >
-        <div className="relative mx-auto w-[100%] max-w-none rounded-[20px] border border-slate-200 bg-white p-6 text-slate-900 shadow-sm">
+        <div className={`relative mx-auto w-full max-w-none rounded-[20px] border p-5 text-slate-900 shadow-sm sm:p-6 ${isDark ? 'border-slate-700 bg-slate-900 text-slate-100' : 'border-slate-200 bg-white'}`}>
         <div className="text-center">
-          <h2 className="text-2xl font-semibold uppercase tracking-[0.2em]">TAXI RECEIPT</h2>
-          <div className="mt-4 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
+          <h2 className="text-2xl font-semibold uppercase tracking-[0.2em] text-slate-800">TAXI RECEIPT</h2>
+          <div className="mt-4 flex flex-wrap justify-center gap-6 text-sm text-slate-600 dark:text-slate-300">
             <span>Date: {values.date ? format(new Date(values.date), 'dd/MM/yyyy') : '-'}</span>
             <span>Bill Number: {values.billNumber || '-'}</span>
           </div>
-        </div>
-
-        <div className=" rounded-2xl p-4">
           {values.customerName ? (
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Customer</span>
-              <span className="text-lg font-semibold text-slate-900">{values.customerName}</span>
+            <div className="mt-4 inline-flex rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100">
+              Customer: {values.customerName}
             </div>
           ) : null}
-          <div className="mt-3 grid gap-1 md:grid-cols-2">
-            {customerDetails.filter((detail) => detail.label !== 'Customer Name').map((detail) => (
-              <p key={detail.label} className="text-sm text-slate-700">
-                {detail.label}: {detail.value}
-              </p>
-            ))}
-          </div>
         </div>
 
-        <JourneySection values={values} totalKm={totalKm} />
+        <JourneySection values={values} totalKm={totalKm} customerDetails={customerDetails.filter((detail) => detail.label !== 'Customer Name')} />
         <ChargesTable values={values} />
         <RemarksSection remarks={values.remarks} />
         <img
