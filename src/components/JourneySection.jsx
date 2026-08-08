@@ -18,7 +18,7 @@ export const JourneySection = ({ values, totalKm, customerDetails = [] }) => {
     <div className="mt-4 flex flex-nowrap items-start gap-4 rounded-2xl border border-slate-200 bg-gradient-to-r from-blue-50 to-slate-50 p-4 dark:border-slate-700 dark:from-slate-800 dark:to-slate-900">
       {customerDetails.length > 0 ? (
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-700">Customer</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-700">Vehicele Detail</p>
           <div className="mt-2 space-y-1 text-sm">
             {customerDetails.map((row) => (
               <p key={row.label} className="leading-6">
