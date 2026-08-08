@@ -50,7 +50,7 @@ export const ReceiptPreview = ({ values, isDark, previewRef }) => {
         <JourneySection values={values} totalKm={totalKm} customerDetails={customerDetails.filter((detail) => detail.label !== 'Customer Name')} />
         <ChargesTable values={values} />
         <RemarksSection remarks={values.remarks} />
-        <img
+        <img 
           src={receiptSeal}
           alt="Receipt Seal"
           className="pointer-events-none absolute bottom-10 right-6 h-24 w-24 rounded-3xl object-contain opacity-90"
